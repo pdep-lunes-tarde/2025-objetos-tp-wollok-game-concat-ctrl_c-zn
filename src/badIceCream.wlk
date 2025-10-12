@@ -1,7 +1,7 @@
 import wollok.game.*
 import personajes.helado.*
 import utils.direcciones.*
-import fruta.*
+import objetos.fruta.*
 import personajes.monstruo.*
 
 object badIceCream {
@@ -14,13 +14,19 @@ object badIceCream {
     }
 
     const hielos = []
-    var frutas = [new Banana(posicion = new Position(x = 12, y = 3)), new Banana(posicion = new Position(x = 1, y = 6)), new Banana(posicion = new Position(x = 9, y = 0)),
-     new Banana(posicion = new Position(x = 0, y = 7)), new Banana(posicion = new Position(x = 20, y = 15))]
+    const frutas = [
+        new Banana(posicion = new Position(x = 12, y = 3)),
+        new Banana(posicion = new Position(x = 1, y = 6)),
+        new Banana(posicion = new Position(x = 9, y = 0)),
+        new Banana(posicion = new Position(x = 0, y = 7)),
+        new Banana(posicion = new Position(x = 20, y = 15))
+    ]
 
     method configurar(){
         game.width(self.ancho())
         game.height(self.alto())
         game.cellSize(32)
+        game.boardGround("background.png")
 
         game.addVisual(frutas.get(0))
         game.addVisual(frutas.get(1))
@@ -28,8 +34,18 @@ object badIceCream {
         game.addVisual(frutas.get(3))
         game.addVisual(frutas.get(4))
 
+        const monstruoVerde = new Monstruo()
+
         game.addVisual(vainilla)
-        game.addVisual(new Monstruo())
+        game.addVisual(monstruoVerde)
+
+        game.onTick(300, "movimiento_monstruo", { monstruoVerde.move() })
+
+        game.onCollideDo(vainilla, { otro =>
+            if(otro == monstruoVerde){
+                vainilla.chocasteConMonstruo(monstruoVerde)
+            }
+        })
 
         keyboard.space().onPressDo{
             vainilla.accionHielo()

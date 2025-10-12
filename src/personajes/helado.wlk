@@ -7,10 +7,6 @@ class Helado {
     var posicion = new Position(x = 10, y = 10)
     var direccion = abajo
 
-    method image() {
-        return ""
-    }
-
     method position() {
         return posicion
     }
@@ -97,10 +93,22 @@ class Helado {
         badIceCream.eliminarFruta(fruta)
       }
     }
+
+    
 }
 
 object vainilla inherits Helado{
-    override method image(){
-        return "Helado Vainilla.png"
+    var imagen = "Helado_Vainilla.png"
+
+    method image(){
+        return imagen
+    }
+    
+    method setImage(nuevaImagen){
+        imagen = nuevaImagen
+    }
+
+    method chocasteConMonstruo(monstruo){
+        self.setImage("Helado_Vainilla_Derretido.png")
     }
 }
