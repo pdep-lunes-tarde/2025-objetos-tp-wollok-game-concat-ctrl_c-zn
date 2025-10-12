@@ -1,5 +1,8 @@
 import wollok.game.*
 import personajes.*
+import personajes.helado.*
+import utils.direcciones.*
+import fruta.*
 
 object badIceCream {
     method ancho(){
@@ -17,22 +20,19 @@ object badIceCream {
         game.height(self.alto())
         game.cellSize(32)
 
+        game.addVisual(new Banana(posicion = new Position(x = 12, y = 3)))
+        game.addVisual(new Banana(posicion = new Position(x = 1, y = 6)))
+        game.addVisual(new Banana(posicion = new Position(x = 9, y = 0)))
+        game.addVisual(new Banana(posicion = new Position(x = 0, y = 7)))
+        game.addVisual(new Banana(posicion = new Position(x = 20, y = 15)))
+
         game.addVisual(vainilla)
 
         keyboard.space().onPressDo{
-            var yV = vainilla.position().y()
-            var xV = vainilla.position().x()
+            const direccion = vainilla.direccion()
+            const posicion = vainilla.position()
 
-            if (vainilla.direccion() == abajo) {
-                vainilla.crearHielosAbajo(new Position(x = xV, y = yV - 1))
-            } else if (vainilla.direccion() == arriba) {
-                vainilla.crearHielosArriba(new Position(x = xV, y = yV + 1))
-            } else if (vainilla.direccion() == izquierda) {
-                vainilla.crearHielosIzquierda(new Position(x = xV - 1, y = yV))
-            } else if (vainilla.direccion() == derecha) {
-                vainilla.crearHielosDerecha(new Position(x = xV + 1, y = yV))
-            }
-           
+            vainilla.crearHielos(direccion.siguientePosicion(posicion))
         }
 
         keyboard.r().onPressDo {
@@ -77,3 +77,4 @@ object badIceCream {
         return hielos.any({hielo => hielo.position().equals(posicion)})
     }
 }
+
