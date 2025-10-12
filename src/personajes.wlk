@@ -90,6 +90,17 @@ class Helado {
             self.crearHielosDerecha(posicionHielo.right(1))
         }
     }
+
+    method romperFilaDeHielos(posicionHielo) {
+        if (self.dentroDeLosLimites(posicionHielo) && self.hayHieloEn(posicionHielo)) {
+            const hielo = badIceCream.obtenerHielo(posicionHielo)
+            game.removeVisual(hielo)
+
+            badIceCream.eliminarHielo(hielo)
+
+            self.romperFilaDeHielos(direccion.siguientePosicion(posicionHielo))
+        }
+    }
 }
 
 object vainilla inherits Helado{

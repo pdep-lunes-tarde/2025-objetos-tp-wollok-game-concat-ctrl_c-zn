@@ -35,6 +35,13 @@ object badIceCream {
            
         }
 
+        keyboard.r().onPressDo {
+            const direccion = vainilla.direccion()
+            const posicion = vainilla.position()
+
+            vainilla.romperFilaDeHielos(direccion.siguientePosicion(posicion))
+        }
+
         keyboard.right().onPressDo {
             vainilla.move(derecha)
         }
@@ -51,6 +58,14 @@ object badIceCream {
     
     method aniadirHielo(hielo) {
         hielos.add(hielo)
+    }
+
+    method eliminarHielo(hielo) {
+        hielos.remove(hielo)
+    }
+
+    method obtenerHielo(posicion) {
+        return hielos.filter({hielo => hielo.position().equals(posicion)}).first()
     }
 
     method jugar() {
