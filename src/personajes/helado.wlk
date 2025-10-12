@@ -52,6 +52,20 @@ class Helado {
         return badIceCream.hayHielo(posicionHielo)
     }
 
+    method accionHielo() {
+        const siguientePosicion = direccion.siguientePosicion(posicion)
+
+        if (self.dentroDeLosLimites(siguientePosicion) && !self.hayHieloEn(siguientePosicion)) {
+            // Si esta en los limites y no hay hielo, crea hielo
+            self.crearHielos(siguientePosicion)
+        }
+        
+        else if (self.dentroDeLosLimites(siguientePosicion) && self.hayHieloEn(siguientePosicion)) {
+            // Si esta en los limites y hay hielo, rompe la fila de hielos
+            self.romperFilaDeHielos(siguientePosicion)
+        }
+    }
+
     method crearHielos(posicionHielo) {
         if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()

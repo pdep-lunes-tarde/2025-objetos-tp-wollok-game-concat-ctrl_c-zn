@@ -29,17 +29,7 @@ object badIceCream {
         game.addVisual(vainilla)
 
         keyboard.space().onPressDo{
-            const direccion = vainilla.direccion()
-            const posicion = vainilla.position()
-
-            vainilla.crearHielos(direccion.siguientePosicion(posicion))
-        }
-
-        keyboard.r().onPressDo {
-            const direccion = vainilla.direccion()
-            const posicion = vainilla.position()
-
-            vainilla.romperFilaDeHielos(direccion.siguientePosicion(posicion))
+            vainilla.accionHielo()
         }
 
         keyboard.right().onPressDo {
