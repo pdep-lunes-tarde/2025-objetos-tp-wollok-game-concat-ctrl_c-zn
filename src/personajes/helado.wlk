@@ -29,8 +29,11 @@ class Helado {
 
     method move(nuevaDireccion) {
         const nuevaPosicion = nuevaDireccion.siguientePosicion(posicion)
-        posicion = self.posicionCorregida(nuevaPosicion)
-        self.direccion(nuevaDireccion)
+
+        if (self.dentroDeLosLimites(nuevaPosicion) && !self.hayHieloEn(nuevaPosicion)) {
+            posicion = self.posicionCorregida(nuevaPosicion)
+            self.direccion(nuevaDireccion)
+        }
     }
 
     method posicionCorregida(posicionACorregir) {
