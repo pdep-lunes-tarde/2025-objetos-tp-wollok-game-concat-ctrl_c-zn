@@ -89,8 +89,13 @@ class Helado {
         }
     }
 
-    method comerFruta(posicionFruta) {
-      
+    method comerFruta() {
+      const fruta = badIceCream.frutas().findOne{ unaFruta => unaFruta.position().equals(posicion)}
+
+      if(fruta != null){
+        game.removeVisual(fruta)
+        badIceCream.eliminarFruta(fruta)
+      }
     }
 }
 
