@@ -10,6 +10,8 @@ object badIceCream {
         return 20
     }
 
+    const hielos = []
+
     method configurar(){
         game.width(self.ancho())
         game.height(self.alto())
@@ -22,13 +24,13 @@ object badIceCream {
             var xV = vainilla.position().x()
 
             if (vainilla.direccion() == abajo) {
-                vainilla.crearHielosAbajo(new Position(x = xV, y = yV - 2))
+                vainilla.crearHielosAbajo(new Position(x = xV, y = yV - 1))
             } else if (vainilla.direccion() == arriba) {
-                vainilla.crearHielosArriba(new Position(x = xV, y = yV + 2))
+                vainilla.crearHielosArriba(new Position(x = xV, y = yV + 1))
             } else if (vainilla.direccion() == izquierda) {
-                vainilla.crearHielosIzquierda(new Position(x = xV - 2, y = yV))
+                vainilla.crearHielosIzquierda(new Position(x = xV - 1, y = yV))
             } else if (vainilla.direccion() == derecha) {
-                vainilla.crearHielosDerecha(new Position(x = xV + 2, y = yV))
+                vainilla.crearHielosDerecha(new Position(x = xV + 1, y = yV))
             }
            
         }
@@ -46,9 +48,17 @@ object badIceCream {
             vainilla.move(abajo)
         }
     }
+    
+    method aniadirHielo(hielo) {
+        hielos.add(hielo)
+    }
 
     method jugar() {
         self.configurar()
         game.start()
+    }
+
+    method hayHielo(posicion) {
+        return hielos.any({hielo => hielo.position().equals(posicion)})
     }
 }

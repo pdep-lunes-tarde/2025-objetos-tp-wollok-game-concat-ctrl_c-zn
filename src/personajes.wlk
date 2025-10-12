@@ -38,38 +38,55 @@ class Helado {
         return new Position(x = nuevaX, y = nuevaY)
     }
 
+    method dentroDeLosLimites(posicionHielo) {
+        return posicionHielo.x() >= 0 && posicionHielo.x() <= badIceCream.ancho() &&
+            posicionHielo.y() >= 0 && posicionHielo.y() <= badIceCream.alto()
+    }
+
+    method hayHieloEn(posicionHielo) {
+        return badIceCream.hayHielo(posicionHielo)
+    }
+
     method crearHielosAbajo(posicionHielo) {
-        if (posicionHielo.y() >= 0 && posicionHielo.y() <= badIceCream.alto()) {
+        if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()
             nuevoHielo.position(posicionHielo)
             game.addVisual(nuevoHielo)
+            badIceCream.aniadirHielo(nuevoHielo)
+            
             self.crearHielosAbajo(posicionHielo.down(1))
         }
     }
 
     method crearHielosArriba(posicionHielo) {
-        if (posicionHielo.y() >= 0 && posicionHielo.y() <= badIceCream.alto()) {
+        if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()
             nuevoHielo.position(posicionHielo)
             game.addVisual(nuevoHielo)
+            badIceCream.aniadirHielo(nuevoHielo)
+
             self.crearHielosArriba(posicionHielo.up(1))
         }
     }
 
     method crearHielosIzquierda(posicionHielo) {
-        if (posicionHielo.x() >= 0 && posicionHielo.x() <= badIceCream.ancho()) {
+        if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()
             nuevoHielo.position(posicionHielo)
             game.addVisual(nuevoHielo)
+            badIceCream.aniadirHielo(nuevoHielo)
+
             self.crearHielosIzquierda(posicionHielo.left(1))
         }
     }
 
     method crearHielosDerecha(posicionHielo) {
-        if (posicionHielo.x() >= 0 && posicionHielo.x() <= badIceCream.ancho()) {
+        if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()
             nuevoHielo.position(posicionHielo)
             game.addVisual(nuevoHielo)
+            badIceCream.aniadirHielo(nuevoHielo)
+
             self.crearHielosDerecha(posicionHielo.right(1))
         }
     }
