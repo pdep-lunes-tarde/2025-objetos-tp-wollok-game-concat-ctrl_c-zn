@@ -1,3 +1,6 @@
-program juego {
+import badIceCream.badIceCream
 
+program juego {
+    badIceCream.jugar()
 }
+    
