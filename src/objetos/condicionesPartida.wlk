@@ -19,3 +19,11 @@ object restart inherits AccionesPartida{
     }
 
 }
+
+object win inherits AccionesPartida{
+    const imagen = "win.png"
+
+    method image(){
+        return imagen
+    }
+}

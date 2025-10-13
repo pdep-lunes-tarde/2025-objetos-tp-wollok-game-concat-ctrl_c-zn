@@ -46,7 +46,7 @@ object badIceCream {
         game.onTick(300, "movimiento_monstruo", { monstruoVerde.move() })
 
         game.onCollideDo(vainilla, { otro =>
-            if(otro == monstruoVerde){
+            if(otro == monstruoVerde && !game.hasVisual(win)){
                 vainilla.chocasteConMonstruo(monstruoVerde)
             }
         })
@@ -57,12 +57,13 @@ object badIceCream {
                 frutas.remove(otro)
             }
             if(frutas.isEmpty()){
-                // objeto para ganar, no creado
+                game.addVisual(win)
+                vainilla.perdio(true)
             }
         })
 
         keyboard.space().onPressDo{
-             if(game.hasVisual(restart)){
+             if(game.hasVisual(restart) || game.hasVisual(win)){
                 self.restart()
             }
             else {
