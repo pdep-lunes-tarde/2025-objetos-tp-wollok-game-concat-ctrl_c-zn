@@ -44,8 +44,13 @@ class Helado {
             if (self.dentroDeLosLimites(nuevaPosicion) && !self.hayHieloEn(nuevaPosicion)) {
                 posicion = self.posicionCorregida(nuevaPosicion)
                 self.direccion(nuevaDireccion)
+                self.cambiarImagenPorDireccion(nuevaDireccion)
             }
         }
+        
+    }
+
+    method cambiarImagenPorDireccion(nuevaDireccion){
         
     }
 
@@ -139,6 +144,21 @@ object vainilla inherits Helado{
         self.setImage("Helado_Vainilla.png")
         self.perdio(false)
         self.direccion(abajo)
+    }
+
+    override method cambiarImagenPorDireccion(direccionNueva){
+        if(direccionNueva == derecha){
+            self.setImage("Vainilla derecha.png")
+        }
+        else if(direccionNueva == izquierda){
+            self.setImage("Vainilla izquierda.png")
+        }
+        else if(direccionNueva == arriba){
+            self.setImage("Vainilla arriba.png")
+        }
+        else {
+            self.setImage("Helado_Vainilla.png")
+        }
     }
 
 }
