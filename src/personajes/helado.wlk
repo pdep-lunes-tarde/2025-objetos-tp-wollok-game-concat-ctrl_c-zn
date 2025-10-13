@@ -6,6 +6,15 @@ import src.utils.direcciones.*
 class Helado {
     var posicion = new Position(x = 10, y = 10)
     var direccion = abajo
+    var perdio = false
+
+    method perdio(){
+        return perdio
+    }
+    
+    method perdio(estado){
+        perdio = estado
+    }
 
     method position() {
         return posicion
@@ -25,11 +34,13 @@ class Helado {
 
     method move(nuevaDireccion) {
         const nuevaPosicion = nuevaDireccion.siguientePosicion(posicion)
-
-        if (self.dentroDeLosLimites(nuevaPosicion) && !self.hayHieloEn(nuevaPosicion)) {
-            posicion = self.posicionCorregida(nuevaPosicion)
-            self.direccion(nuevaDireccion)
+        if(!self.perdio()){
+            if (self.dentroDeLosLimites(nuevaPosicion) && !self.hayHieloEn(nuevaPosicion)) {
+                posicion = self.posicionCorregida(nuevaPosicion)
+                self.direccion(nuevaDireccion)
+            }
         }
+        
     }
 
     method posicionCorregida(posicionACorregir) {
@@ -40,8 +51,8 @@ class Helado {
     }
 
     method dentroDeLosLimites(posicionHielo) {
-        return posicionHielo.x() >= 0 && posicionHielo.x() <= badIceCream.ancho() &&
-            posicionHielo.y() >= 0 && posicionHielo.y() <= badIceCream.alto()
+        return posicionHielo.x() >= 0 && posicionHielo.x() < badIceCream.ancho() - 1 &&
+            posicionHielo.y() >= 0 && posicionHielo.y() < badIceCream.alto() - 1
     }
 
     method hayHieloEn(posicionHielo) {
@@ -50,16 +61,19 @@ class Helado {
 
     method accionHielo() {
         const siguientePosicion = direccion.siguientePosicion(posicion)
-
-        if (self.dentroDeLosLimites(siguientePosicion) && !self.hayHieloEn(siguientePosicion)) {
-            // Si esta en los limites y no hay hielo, crea hielo
-            self.crearHielos(siguientePosicion)
+        
+        if (!self.perdio()) {
+            if (self.dentroDeLosLimites(siguientePosicion) && !self.hayHieloEn(siguientePosicion)) {
+                // Si esta en los limites y no hay hielo, crea hielo
+                self.crearHielos(siguientePosicion)
+            }
+        
+            else if (self.dentroDeLosLimites(siguientePosicion) && self.hayHieloEn(siguientePosicion)) {
+                // Si esta en los limites y hay hielo, rompe la fila de hielos
+                self.romperFilaDeHielos(siguientePosicion)
+            }
         }
         
-        else if (self.dentroDeLosLimites(siguientePosicion) && self.hayHieloEn(siguientePosicion)) {
-            // Si esta en los limites y hay hielo, rompe la fila de hielos
-            self.romperFilaDeHielos(siguientePosicion)
-        }
     }
 
     method crearHielos(posicionHielo) {
@@ -103,12 +117,15 @@ object vainilla inherits Helado{
     method image(){
         return imagen
     }
+
+
     
     method setImage(nuevaImagen){
         imagen = nuevaImagen
     }
 
     method chocasteConMonstruo(monstruo){
+        self.perdio(true)
         self.setImage("Helado_Vainilla_Derretido.png")
     }
 }

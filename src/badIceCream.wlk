@@ -19,13 +19,14 @@ object badIceCream {
         new Banana(posicion = new Position(x = 1, y = 6)),
         new Banana(posicion = new Position(x = 9, y = 0)),
         new Banana(posicion = new Position(x = 0, y = 7)),
-        new Banana(posicion = new Position(x = 20, y = 15))
+        new Banana(posicion = new Position(x = 18, y = 15))
     ]
 
     method configurar(){
         game.width(self.ancho())
         game.height(self.alto())
         game.cellSize(32)
+
         game.boardGround("background.png")
 
         game.addVisual(frutas.get(0))
@@ -63,11 +64,11 @@ object badIceCream {
         keyboard.down().onPressDo {
             vainilla.move(abajo)
         }
-    }
+    }   
 
-    method dentroDeLosLimites(posicion) {
-        return posicion.x() >= 0 && posicion.x() <= self.ancho() &&
-            posicion.y() >= 0 && posicion.y() <= self.alto()
+    method dentroDeLosLimites(nuevaPosicion) {
+        return nuevaPosicion.x() >= 0 && nuevaPosicion.x() < self.ancho() - 1 &&
+           nuevaPosicion.y() >= 0 && nuevaPosicion.y() < self.alto() - 1
     }
     
     method aniadirHielo(hielo) {
