@@ -2,9 +2,13 @@ import wollok.game.*
 import personajes.helado.*
 import utils.direcciones.*
 import objetos.fruta.*
+import objetos.condicionesPartida.*
 import personajes.monstruo.*
 
 object badIceCream {
+    var frutas = []
+    const hielos = []
+
     method ancho(){
         return 20
     }
@@ -13,15 +17,15 @@ object badIceCream {
         return 20
     }
 
-    const hielos = []
-    const frutas = [
-        new Banana(posicion = new Position(x = 12, y = 3)),
-        new Banana(posicion = new Position(x = 1, y = 6)),
-        new Banana(posicion = new Position(x = 9, y = 0)),
-        new Banana(posicion = new Position(x = 0, y = 7)),
-        new Banana(posicion = new Position(x = 18, y = 15))
-    ]
-
+    method crearFrutas() {
+        return [
+            new Banana(posicion = new Position(x = 12, y = 3)),
+            new Banana(posicion = new Position(x = 1, y = 6)),
+            new Banana(posicion = new Position(x = 9, y = 0)),
+            new Banana(posicion = new Position(x = 0, y = 7)),
+            new Banana(posicion = new Position(x = 18, y = 15))
+        ]
+    }
     method configurar(){
         game.width(self.ancho())
         game.height(self.alto())
@@ -29,11 +33,9 @@ object badIceCream {
 
         game.boardGround("background.png")
 
-        game.addVisual(frutas.get(0))
-        game.addVisual(frutas.get(1))
-        game.addVisual(frutas.get(2))
-        game.addVisual(frutas.get(3))
-        game.addVisual(frutas.get(4))
+        frutas = self.crearFrutas()
+        frutas.forEach({ fruta => game.addVisual(fruta) })
+
 
         const monstruoVerde = new Monstruo()
         vainilla.init()
@@ -49,8 +51,23 @@ object badIceCream {
             }
         })
 
+        game.onCollideDo(vainilla, { otro =>
+            if(frutas.contains(otro)){
+                otro.chocaConHelado(vainilla)
+                frutas.remove(otro)
+            }
+            if(frutas.isEmpty()){
+                // objeto para ganar, no creado
+            }
+        })
+
         keyboard.space().onPressDo{
-            vainilla.accionHielo()
+             if(game.hasVisual(restart)){
+                self.restart()
+            }
+            else {
+                vainilla.accionHielo()
+            }
         }
 
         keyboard.right().onPressDo {

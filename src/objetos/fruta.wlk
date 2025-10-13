@@ -11,6 +11,10 @@ class Fruta{
     method posicionFruta(newX, newY){
         posicion = new Position(x = newX, y = newY)
     }
+
+    method chocaConHelado(helado){
+        game.removeVisual(self)
+    }
 }
 
 class Banana inherits Fruta {

@@ -1,7 +1,7 @@
 import wollok.game.*
 import badIceCream.*
 import objetos.hielo.*
-import objetos.restart.*
+import objetos.condicionesPartida.*
 import src.utils.direcciones.*
 
 class Helado {
@@ -131,7 +131,7 @@ object vainilla inherits Helado{
     method chocasteConMonstruo(monstruo){
         self.perdio(true)
         self.setImage("Helado_Vainilla_Derretido.png")
-        badIceCream.restart()
+        game.addVisual(restart)
     }
 
     override method init(){
