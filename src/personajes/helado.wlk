@@ -1,10 +1,11 @@
 import wollok.game.*
 import badIceCream.*
 import objetos.hielo.*
+import objetos.restart.*
 import src.utils.direcciones.*
 
 class Helado {
-    var posicion = new Position(x = 10, y = 10)
+    var posicion = game.center()
     var direccion = abajo
     var perdio = false
 
@@ -30,6 +31,11 @@ class Helado {
 
     method position(nuevaPosicion) {
         posicion = nuevaPosicion
+    }
+
+    method init(){
+        self.position(game.center())
+        self.perdio(false)
     }
 
     method move(nuevaDireccion) {
@@ -117,8 +123,6 @@ object vainilla inherits Helado{
     method image(){
         return imagen
     }
-
-
     
     method setImage(nuevaImagen){
         imagen = nuevaImagen
@@ -127,5 +131,14 @@ object vainilla inherits Helado{
     method chocasteConMonstruo(monstruo){
         self.perdio(true)
         self.setImage("Helado_Vainilla_Derretido.png")
+        badIceCream.restart()
     }
+
+    override method init(){
+        self.position(game.center())
+        self.setImage("Helado_Vainilla.png")
+        self.perdio(false)
+        self.direccion(abajo)
+    }
+
 }

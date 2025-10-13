@@ -36,6 +36,7 @@ object badIceCream {
         game.addVisual(frutas.get(4))
 
         const monstruoVerde = new Monstruo()
+        vainilla.init()
 
         game.addVisual(vainilla)
         game.addVisual(monstruoVerde)
@@ -86,6 +87,11 @@ object badIceCream {
     method jugar() {
         self.configurar()
         game.start()
+    }
+
+    method restart() {
+        game.clear()
+        self.configurar()
     }
 
     method hayHielo(posicion) {
