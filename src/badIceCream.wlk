@@ -2,12 +2,13 @@ import wollok.game.*
 import personajes.helado.*
 import utils.direcciones.*
 import objetos.fruta.*
+import objetos.hielo.*
 import objetos.condicionesPartida.*
 import personajes.monstruo.*
 
 object badIceCream {
     var frutas = []
-    const hielos = []
+    var hielos = []
 
     method ancho(){
         return 20
@@ -17,7 +18,7 @@ object badIceCream {
         return 20
     }
 
-    method crearFrutas() {
+    method crearFrutasNivel1() {
         return [
             new Banana(posicion = new Position(x = 12, y = 3)),
             new Banana(posicion = new Position(x = 1, y = 6)),
@@ -33,9 +34,11 @@ object badIceCream {
 
         game.boardGround("background.png")
 
-        frutas = self.crearFrutas()
+        frutas = self.crearFrutasNivel1()
         frutas.forEach({ fruta => game.addVisual(fruta) })
 
+        hielos = (new Hielo().crearBordesDeHielo())
+        hielos.forEach({hielo => game.addVisual(hielo)})
 
         const monstruoVerde = new Monstruo()
         vainilla.init()

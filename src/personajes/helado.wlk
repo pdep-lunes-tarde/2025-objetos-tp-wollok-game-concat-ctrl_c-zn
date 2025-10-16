@@ -41,7 +41,7 @@ class Helado {
     method move(nuevaDireccion) {
         const nuevaPosicion = nuevaDireccion.siguientePosicion(posicion)
         if(!self.perdio()){
-            if (self.dentroDeLosLimites(nuevaPosicion) && !self.hayHieloEn(nuevaPosicion)) {
+            if (badIceCream.dentroDeLosLimites(nuevaPosicion) && !badIceCream.hayHielo(nuevaPosicion)) {
                 posicion = self.posicionCorregida(nuevaPosicion)
                 self.direccion(nuevaDireccion)
                 self.cambiarImagenPorDireccion(nuevaDireccion)
@@ -50,9 +50,7 @@ class Helado {
         
     }
 
-    method cambiarImagenPorDireccion(nuevaDireccion){
-        
-    }
+    method cambiarImagenPorDireccion(nuevaDireccion) 
 
     method posicionCorregida(posicionACorregir) {
         const nuevaY = wraparound.aplicarA(posicionACorregir.y(), 0, badIceCream.alto())
@@ -61,52 +59,17 @@ class Helado {
         return new Position(x = nuevaX, y = nuevaY)
     }
 
-    method dentroDeLosLimites(posicionHielo) {
-        return posicionHielo.x() >= 0 && posicionHielo.x() < badIceCream.ancho() - 1 &&
-            posicionHielo.y() >= 0 && posicionHielo.y() < badIceCream.alto() - 1
-    }
-
-    method hayHieloEn(posicionHielo) {
-        return badIceCream.hayHielo(posicionHielo)
-    }
-
     method accionHielo() {
         const siguientePosicion = direccion.siguientePosicion(posicion)
-        
-        if (!self.perdio()) {
-            if (self.dentroDeLosLimites(siguientePosicion) && !self.hayHieloEn(siguientePosicion)) {
-                // Si esta en los limites y no hay hielo, crea hielo
-                self.crearHielos(siguientePosicion)
+        const hielo = new Hielo()
+
+        if (!self.perdio() && badIceCream.dentroDeLosLimites(siguientePosicion)) {            
+            if (!badIceCream.hayHielo(siguientePosicion)) {
+                hielo.crearHielosDesde(siguientePosicion, direccion)
+            } 
+            else {
+                hielo.romperFilaDesde(siguientePosicion, direccion)
             }
-        
-            else if (self.dentroDeLosLimites(siguientePosicion) && self.hayHieloEn(siguientePosicion)) {
-                // Si esta en los limites y hay hielo, rompe la fila de hielos
-                self.romperFilaDeHielos(siguientePosicion)
-            }
-        }
-        
-    }
-
-    method crearHielos(posicionHielo) {
-        if (self.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
-            const nuevoHielo = new Hielo()
-            nuevoHielo.position(posicionHielo)
-
-            game.addVisual(nuevoHielo)
-            badIceCream.aniadirHielo(nuevoHielo)
-
-            self.crearHielos(direccion.siguientePosicion(posicionHielo))
-        }   
-    }
-
-    method romperFilaDeHielos(posicionHielo) {
-        if (self.dentroDeLosLimites(posicionHielo) && self.hayHieloEn(posicionHielo)) {
-            const hielo = badIceCream.obtenerHielo(posicionHielo)
-            game.removeVisual(hielo)
-
-            badIceCream.eliminarHielo(hielo)
-
-            self.romperFilaDeHielos(direccion.siguientePosicion(posicionHielo))
         }
     }
 
