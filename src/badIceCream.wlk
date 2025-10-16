@@ -18,13 +18,38 @@ object badIceCream {
         return 20
     }
 
+    method hielosNivel1(){
+        var hielosNivel1 = []
+        (5..14).forEach { y =>
+            const hielo = new Hielo(posicion = new Position(x = 15, y = y))
+            hielosNivel1.add(hielo)
+        }
+        hielosNivel1 += [
+            new Hielo(posicion = new Position(x = 14, y = 15)),
+            new Hielo(posicion = new Position(x = 15, y = 15)),
+            new Hielo(posicion = new Position(x = 13, y = 15)),
+            new Hielo(posicion = new Position(x = 13, y = 5)),
+            new Hielo(posicion = new Position(x = 14, y = 5))
+
+        ]
+
+        return hielosNivel1
+    }
+
     method crearFrutasNivel1() {
         return [
-            new Banana(posicion = new Position(x = 12, y = 3)),
-            new Banana(posicion = new Position(x = 1, y = 6)),
-            new Banana(posicion = new Position(x = 9, y = 0)),
-            new Banana(posicion = new Position(x = 0, y = 7)),
-            new Banana(posicion = new Position(x = 18, y = 15))
+            new Banana(posicion = new Position(x = 4, y = 16)),
+            new Banana(posicion = new Position(x = 3, y = 16)),
+            new Banana(posicion = new Position(x = 3, y = 15)),
+            new Banana(posicion = new Position(x = 15, y = 16)),
+            new Banana(posicion = new Position(x = 16, y = 16)),
+            new Banana(posicion = new Position(x = 16, y = 15)),
+            new Banana(posicion = new Position(x = 3, y = 5)),
+            new Banana(posicion = new Position(x = 4, y = 4)),
+            new Banana(posicion = new Position(x = 3, y = 4)),
+            new Banana(posicion = new Position(x = 15, y = 4)),
+            new Banana(posicion = new Position(x = 16, y = 5)),
+            new Banana(posicion = new Position(x = 16, y = 4))
         ]
     }
     method configurar(){
@@ -37,7 +62,9 @@ object badIceCream {
         frutas = self.crearFrutasNivel1()
         frutas.forEach({ fruta => game.addVisual(fruta) })
 
-        hielos = (new Hielo().crearBordesDeHielo())
+        hielos = new Hielo().crearBordesDeHielo()
+        hielos += self.hielosNivel1()
+
         hielos.forEach({hielo => game.addVisual(hielo)})
 
         const monstruoVerde = new Monstruo()
