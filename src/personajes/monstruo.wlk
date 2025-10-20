@@ -2,7 +2,7 @@ import src.badIceCream.*
 import src.utils.direcciones.*
 
 class Monstruo {
-    var posicion = new Position(x = 5, y = 5)
+    var posicion = new Position(x = 3, y = 3)
     const image = "monstruo_verde.png"
     var direccion = derecha
 

@@ -5,10 +5,14 @@ import objetos.fruta.*
 import objetos.hielo.*
 import objetos.condicionesPartida.*
 import personajes.monstruo.*
+import niveles.nivel_1.*
+import niveles.nivel_2.*
 
 object badIceCream {
     var frutas = []
     var hielos = []
+    var monstruos = []
+    var nivel = nivel_1
 
     method ancho(){
         return 20
@@ -18,66 +22,29 @@ object badIceCream {
         return 20
     }
 
-    method hielosNivel1(){
-        var hielosNivel1 = []
-        (5..14).forEach { y =>
-            const hielo = new Hielo(posicion = new Position(x = 15, y = y))
-            hielosNivel1.add(hielo)
-        }
-        hielosNivel1 += [
-            new Hielo(posicion = new Position(x = 14, y = 15)),
-            new Hielo(posicion = new Position(x = 15, y = 15)),
-            new Hielo(posicion = new Position(x = 13, y = 15)),
-            new Hielo(posicion = new Position(x = 13, y = 5)),
-            new Hielo(posicion = new Position(x = 14, y = 5))
 
-        ]
-
-        return hielosNivel1
-    }
-
-    method crearFrutasNivel1() {
-        return [
-            new Banana(posicion = new Position(x = 4, y = 16)),
-            new Banana(posicion = new Position(x = 3, y = 16)),
-            new Banana(posicion = new Position(x = 3, y = 15)),
-            new Banana(posicion = new Position(x = 15, y = 16)),
-            new Banana(posicion = new Position(x = 16, y = 16)),
-            new Banana(posicion = new Position(x = 16, y = 15)),
-            new Banana(posicion = new Position(x = 3, y = 5)),
-            new Banana(posicion = new Position(x = 4, y = 4)),
-            new Banana(posicion = new Position(x = 3, y = 4)),
-            new Banana(posicion = new Position(x = 15, y = 4)),
-            new Banana(posicion = new Position(x = 16, y = 5)),
-            new Banana(posicion = new Position(x = 16, y = 4))
-        ]
-    }
     method configurar(){
-        game.width(self.ancho())
-        game.height(self.alto())
-        game.cellSize(32)
-
         game.boardGround("background.png")
 
-        frutas = self.crearFrutasNivel1()
+        frutas = nivel.get_frutasIniciales()
         frutas.forEach({ fruta => game.addVisual(fruta) })
 
         hielos = new Hielo().crearBordesDeHielo()
-        hielos += self.hielosNivel1()
+        hielos += nivel.get_hielosIniciales()
 
         hielos.forEach({hielo => game.addVisual(hielo)})
 
-        const monstruoVerde = new Monstruo()
+        monstruos = nivel.get_monstruosIniciales()
+        monstruos.forEach({ monstruo => game.addVisual(monstruo) })
+
         vainilla.init()
-
         game.addVisual(vainilla)
-        game.addVisual(monstruoVerde)
 
-        game.onTick(300, "movimiento_monstruo", { monstruoVerde.move() })
+        game.onTick(300, "movimiento_monstruo", { monstruos.forEach({ monstruo => monstruo.move() }) })
 
         game.onCollideDo(vainilla, { otro =>
-            if(otro == monstruoVerde && !game.hasVisual(win)){
-                vainilla.chocasteConMonstruo(monstruoVerde)
+            if(monstruos.contains(otro) && !game.hasVisual(win)){
+                vainilla.chocasteConMonstruo(monstruos)
             }
         })
 
@@ -93,8 +60,11 @@ object badIceCream {
         })
 
         keyboard.space().onPressDo{
-             if(game.hasVisual(restart) || game.hasVisual(win)){
+            if(game.hasVisual(restart)){
                 self.restart()
+            }
+            else if(game.hasVisual(win)){
+                self.pasarDeNivel()
             }
             else {
                 vainilla.accionHielo()
@@ -133,11 +103,21 @@ object badIceCream {
     }
 
     method jugar() {
+        game.width(self.ancho())
+        game.height(self.alto())
+        game.cellSize(32)
+        
         self.configurar()
         game.start()
     }
 
     method restart() {
+        game.clear()
+        self.configurar()
+    }
+
+    method pasarDeNivel() {
+        nivel = nivel.pasarDeNivel()
         game.clear()
         self.configurar()
     }
