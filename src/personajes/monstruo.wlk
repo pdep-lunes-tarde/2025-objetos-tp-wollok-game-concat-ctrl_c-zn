@@ -25,7 +25,6 @@ class Monstruo {
         else {
             // Si esta en el limite o hay hielo, cambiar direccion y avanza en la nueva direccion
             self.cambiarDireccion()
-            posicion = direccion.siguientePosicion(posicion)
         }
     }
 
@@ -39,5 +38,7 @@ class Monstruo {
         } else if (direccion.equals(arriba)) {
             direccion = derecha
         }
+
+        self.move()
     }
 }
