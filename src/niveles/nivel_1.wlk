@@ -60,6 +60,10 @@ object nivel_1 {
     method get_monstruosIniciales() {
         return monstruosIniciales
     }
+    
+    method get_posicionInicialHelado(){
+        return game.center()
+    }
 
     method pasarDeNivel() {
         return nivel_2

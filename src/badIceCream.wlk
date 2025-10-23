@@ -12,7 +12,7 @@ object badIceCream {
     var frutas = []
     var hielos = []
     var monstruos = []
-    var nivel = nivel_1
+    var nivel = nivel_2
 
     method ancho(){
         return 20
@@ -37,7 +37,7 @@ object badIceCream {
         monstruos = nivel.get_monstruosIniciales()
         monstruos.forEach({ monstruo => game.addVisual(monstruo) })
 
-        vainilla.init()
+        vainilla.init(nivel.get_posicionInicialHelado())
         game.addVisual(vainilla)
 
         game.onTick(300, "movimiento_monstruo", { monstruos.forEach({ monstruo => monstruo.move() }) })

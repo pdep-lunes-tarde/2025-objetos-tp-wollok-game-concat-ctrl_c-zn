@@ -33,8 +33,8 @@ class Helado {
         posicion = nuevaPosicion
     }
 
-    method init(){
-        self.position(game.center())
+    method init(position){
+        self.position(position)
         self.perdio(false)
     }
 
@@ -102,8 +102,8 @@ object vainilla inherits Helado{
         game.addVisual(restart)
     }
 
-    override method init(){
-        self.position(game.center())
+    override method init(posicionNueva){
+        self.position(posicionNueva)
         self.setImage("Helado_Vainilla.png")
         self.perdio(false)
         self.direccion(abajo)
