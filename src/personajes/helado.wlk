@@ -39,6 +39,7 @@ class Helado {
     }
 
     method move(nuevaDireccion) {
+        direccion = nuevaDireccion
         const nuevaPosicion = nuevaDireccion.siguientePosicion(posicion)
         if(!self.perdio()){
             if (badIceCream.dentroDeLosLimites(nuevaPosicion) && !badIceCream.hayHielo(nuevaPosicion)) {
