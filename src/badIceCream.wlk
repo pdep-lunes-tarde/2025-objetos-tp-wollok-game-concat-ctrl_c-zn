@@ -7,12 +7,14 @@ import objetos.condicionesPartida.*
 import personajes.monstruo.*
 import niveles.nivel_1.*
 import niveles.nivel_2.*
+import niveles.nivel_3.*
+
 
 object badIceCream {
     var frutas = []
     var hielos = []
     var monstruos = []
-    var nivel = nivel_2
+    var nivel = nivel_1
 
     method ancho(){
         return 20
@@ -112,6 +114,7 @@ object badIceCream {
     }
 
     method restart() {
+        monstruos.forEach({monstruo => monstruo.init()})
         game.clear()
         self.configurar()
     }

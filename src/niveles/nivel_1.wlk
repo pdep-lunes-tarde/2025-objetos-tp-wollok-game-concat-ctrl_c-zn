@@ -1,7 +1,7 @@
 import objetos.hielo.*
 import objetos.fruta.*
 import personajes.monstruo.*
-import src.niveles.nivel_2.nivel_2
+import src.niveles.nivel_3.nivel_3
 
 object nivel_1 {
     const frutasIniciales = [
@@ -66,6 +66,6 @@ object nivel_1 {
     }
 
     method pasarDeNivel() {
-        return nivel_2
+        return nivel_3
     }
 }

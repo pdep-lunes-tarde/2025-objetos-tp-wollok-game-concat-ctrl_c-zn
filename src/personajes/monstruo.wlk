@@ -1,7 +1,9 @@
 import src.badIceCream.*
 import src.utils.direcciones.*
+import src.personajes.helado.vainilla
 
 class Monstruo {
+    const posicionInicial = new Position(x = 3, y = 3)
     var posicion = new Position(x = 3, y = 3)
     const image = "monstruo_verde.png"
     var direccion = derecha
@@ -12,6 +14,11 @@ class Monstruo {
 
     method image() {
         return image
+    }
+
+    method init(){
+        posicion = posicionInicial
+        direccion = derecha
     }
 
     method move() {
@@ -40,5 +47,41 @@ class Monstruo {
         }
 
         self.move()
+    }
+}
+
+class MonstruoAmarillo inherits Monstruo (image="YellowSquid.png") {
+    override method move() {
+        if (!vainilla.perdio()) {
+            if (vainilla.position().x() > posicion.x()) {
+                direccion = derecha
+            } else if (vainilla.position().x() < posicion.x()) {
+                direccion = izquierda
+            } else if (vainilla.position().y() > posicion.y()) {
+                direccion = arriba
+            } else if (vainilla.position().y() < posicion.y()) {
+                direccion = abajo
+
+            }
+
+            const siguientePosicion = direccion.siguientePosicion(posicion)
+
+            if (!badIceCream.hayHielo(siguientePosicion)) {
+                posicion = siguientePosicion
+            }
+            else {
+                self.romperHielo(siguientePosicion)
+            }
+        }
+
+        else {
+            super()
+        }
+    }
+
+    method romperHielo(posicionHielo) {
+        const hielo = badIceCream.obtenerHielo(posicionHielo)
+        game.removeVisual(hielo)
+        badIceCream.eliminarHielo(hielo)
     }
 }
