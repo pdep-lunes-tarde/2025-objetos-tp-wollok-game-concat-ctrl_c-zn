@@ -9,6 +9,7 @@ import niveles.nivel_1.*
 import niveles.nivel_2.*
 import niveles.nivel_3.*
 
+//pool de objetos?
 
 object badIceCream {
     var frutas = []
@@ -17,11 +18,11 @@ object badIceCream {
     var nivel = nivel_1
 
     method ancho(){
-        return 20
+        return 16
     }
 
     method alto(){
-        return 20
+        return 16
     }
 
 

@@ -2,6 +2,7 @@ import src.badIceCream.*
 import src.utils.direcciones.*
 import src.personajes.helado.vainilla
 
+// hacer clase MonstruoVerde
 class Monstruo {
     const posicionInicial = new Position(x = 3, y = 3)
     var posicion = new Position(x = 3, y = 3)
@@ -35,6 +36,7 @@ class Monstruo {
         }
     }
 
+    // ser mas expresivo
     method cambiarDireccion() {
         if (direccion.equals(derecha)) {
             direccion = abajo
@@ -53,6 +55,7 @@ class Monstruo {
 class MonstruoAmarillo inherits Monstruo (image="YellowSquid.png") {
     override method move() {
         if (!vainilla.perdio()) {
+            // pasar la condicion a metodo
             if (vainilla.position().x() > posicion.x()) {
                 direccion = derecha
             } else if (vainilla.position().x() < posicion.x()) {

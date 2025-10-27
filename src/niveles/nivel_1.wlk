@@ -5,49 +5,48 @@ import src.niveles.nivel_3.nivel_3
 
 object nivel_1 {
     const frutasIniciales = [
-        new Banana(posicion = new Position(x = 4, y = 16)),
-        new Banana(posicion = new Position(x = 3, y = 16)),
-        new Banana(posicion = new Position(x = 3, y = 15)),
-        new Banana(posicion = new Position(x = 15, y = 16)),
-        new Banana(posicion = new Position(x = 16, y = 16)),
-        new Banana(posicion = new Position(x = 16, y = 15)),
-        new Banana(posicion = new Position(x = 3, y = 5)),
-        new Banana(posicion = new Position(x = 4, y = 4)),
-        new Banana(posicion = new Position(x = 3, y = 4)),
-        new Banana(posicion = new Position(x = 15, y = 4)),
-        new Banana(posicion = new Position(x = 16, y = 5)),
-        new Banana(posicion = new Position(x = 16, y = 4)),
-        new Banana(posicion = new Position(x = 7, y = 7)),
-        new Banana(posicion = new Position(x = 12, y = 7)),
-        new Banana(posicion = new Position(x = 6, y = 10)),
-        new Banana(posicion = new Position(x = 6, y = 11)),
-        new Banana(posicion = new Position(x = 13, y = 10)),
+        new Banana(posicion = new Position(x = 2, y = 4)),
+        new Banana(posicion = new Position(x = 2, y = 3)),
+        new Banana(posicion = new Position(x = 3, y = 3)),
+        new Banana(posicion = new Position(x = 13, y = 4)),
+        new Banana(posicion = new Position(x = 13, y = 3)),
+        new Banana(posicion = new Position(x = 12, y = 3)),
+        new Banana(posicion = new Position(x = 2, y = 11)),
+        new Banana(posicion = new Position(x = 2, y = 12)),
+        new Banana(posicion = new Position(x = 3, y = 12)),
         new Banana(posicion = new Position(x = 13, y = 11)),
-        new Banana(posicion = new Position(x = 7, y = 13)),
-        new Banana(posicion = new Position(x = 12, y = 13))
+        new Banana(posicion = new Position(x = 13, y = 12)),
+        new Banana(posicion = new Position(x = 12, y = 12)),
+        new Banana(posicion = new Position(x = 6, y = 5)),
+        new Banana(posicion = new Position(x = 6, y = 10)),
+        new Banana(posicion = new Position(x = 5, y = 8)),
+        new Banana(posicion = new Position(x = 5, y = 7)),
+        new Banana(posicion = new Position(x = 9, y = 5)),
+        new Banana(posicion = new Position(x = 9, y = 10)),
+        new Banana(posicion = new Position(x = 10, y = 8)),
+        new Banana(posicion = new Position(x = 10, y = 7))
     ]
     const monstruosIniciales = [new Monstruo()]
 
     method get_hielosIniciales() {
         var hielosNivel1 = []
-        (5..14).forEach { y =>
-            const hielo = new Hielo(posicion = new Position(x = 15, y = y))
+        (4..11).forEach { y =>
+            const hielo = new Hielo(posicion = new Position(x = 12, y = y))
             hielosNivel1.add(hielo)
         }
-        (5..15).forEach { y =>
-            const hielo = new Hielo(posicion = new Position(x = 4, y = y))
+        (4..11).forEach { y =>
+            const hielo = new Hielo(posicion = new Position(x = 3, y = y))
             hielosNivel1.add(hielo)
         }
         hielosNivel1 += [
-            new Hielo(posicion = new Position(x = 14, y = 15)),
-            new Hielo(posicion = new Position(x = 15, y = 15)),
-            new Hielo(posicion = new Position(x = 13, y = 15)),
-            new Hielo(posicion = new Position(x = 13, y = 5)),
-            new Hielo(posicion = new Position(x = 14, y = 5)),
-            new Hielo(posicion = new Position(x = 6, y = 5)),
-            new Hielo(posicion = new Position(x = 5, y = 5)),
-            new Hielo(posicion = new Position(x = 6, y = 15)),
-            new Hielo(posicion = new Position(x = 5, y = 15))
+            new Hielo(posicion = new Position(x = 4, y = 4)),
+            new Hielo(posicion = new Position(x = 5, y = 4)),
+            new Hielo(posicion = new Position(x = 10, y = 4)),
+            new Hielo(posicion = new Position(x = 11, y = 4)),
+            new Hielo(posicion = new Position(x = 4, y = 11)),
+            new Hielo(posicion = new Position(x = 5, y = 11)),
+            new Hielo(posicion = new Position(x = 10, y = 11)),
+            new Hielo(posicion = new Position(x = 11, y = 11))
         ]
 
         return hielosNivel1

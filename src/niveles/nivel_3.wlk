@@ -6,25 +6,25 @@ object nivel_3 {
     const hielosIniciales = []
     const frutasIniciales = []
     const monstruosIniciales = [
-        new MonstruoAmarillo(posicionInicial = new Position(x = 16, y = 3), posicion = new Position(x = 16, y = 3))
+        new MonstruoAmarillo(posicionInicial = new Position(x = 12, y = 3), posicion = new Position(x = 12, y = 3))
     ]
 
     method get_hielosIniciales() {
-        self.crearFilaDeHielo(9, 1, 19)
-        self.crearFilaDeHielo(10, 1, 19)
-        self.crearFilaDeHielo(11, 1, 19)
-        self.crearColumnaDeHielo(9, 1, 19)
-        self.crearColumnaDeHielo(10, 1, 19)
-        self.crearColumnaDeHielo(11, 1, 19)
+        self.crearFilaDeHielo(7, 1, 15)
+        self.crearFilaDeHielo(8, 1, 15)
+        self.crearFilaDeHielo(9, 1, 15)
+        self.crearColumnaDeHielo(7, 1, 15)
+        self.crearColumnaDeHielo(8, 1, 15)
+        self.crearColumnaDeHielo(9, 1, 15)
         return hielosIniciales
     }
 
     method get_frutasIniciales(){
-        (12..19).forEach { y => 
-            self.crearFilaDeBananas(y, 12, 19)
+        (10..14).forEach { y => 
+            self.crearFilaDeBananas(y, 10, 14)
         }
-        (1..8).forEach { y => 
-            self.crearFilaDeBananas(y, 1, 8)
+        (1..6).forEach { y => 
+            self.crearFilaDeBananas(y, 1, 6)
         }
 
         return frutasIniciales
@@ -61,6 +61,9 @@ object nivel_3 {
 
 
     method get_posicionInicialHelado() {
-        return new Position(x = 3, y = 16)
+        return new Position(x = 3, y = 12)
+    }
+
+    method pasarDeNivel(){
     }
 }

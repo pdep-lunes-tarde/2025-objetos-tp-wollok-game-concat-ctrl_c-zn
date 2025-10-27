@@ -21,6 +21,8 @@ class Hielo {
         return badIceCream.hayHielo(posicionHielo)
     }
 
+    // pasar a un objeto 
+    // unificar condicion badIceCream.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo) -> mePuedoMover()
     method crearHielosDesde(posicionHielo, direccion) {
         if (badIceCream.dentroDeLosLimites(posicionHielo) && !self.hayHieloEn(posicionHielo)) {
             const nuevoHielo = new Hielo()
