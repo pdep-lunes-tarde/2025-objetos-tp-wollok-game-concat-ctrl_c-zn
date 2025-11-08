@@ -26,7 +26,7 @@ object nivel_1 {
         new Banana(posicion = new Position(x = 10, y = 8)),
         new Banana(posicion = new Position(x = 10, y = 7))
     ]
-    const monstruosIniciales = [new Monstruo()]
+    const monstruosIniciales = [new MonstruoVerde()]
 
     method get_hielosIniciales() {
         var hielosNivel1 = []

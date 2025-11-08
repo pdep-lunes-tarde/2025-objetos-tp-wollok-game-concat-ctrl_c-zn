@@ -2,11 +2,10 @@ import src.badIceCream.*
 import src.utils.direcciones.*
 import src.personajes.helado.vainilla
 
-// hacer clase MonstruoVerde
 class Monstruo {
     const posicionInicial = new Position(x = 3, y = 3)
     var posicion = new Position(x = 3, y = 3)
-    const image = "monstruo_verde.png"
+    const image 
     var direccion = derecha
 
     method position() {
@@ -36,21 +35,13 @@ class Monstruo {
         }
     }
 
-    // ser mas expresivo
     method cambiarDireccion() {
-        if (direccion.equals(derecha)) {
-            direccion = abajo
-        } else if (direccion.equals(abajo)) {
-            direccion = izquierda
-        } else if (direccion.equals(izquierda)) {
-            direccion = arriba
-        } else if (direccion.equals(arriba)) {
-            direccion = derecha
-        }
-
+        direccion = direccion.doblar()
         self.move()
     }
 }
+class MonstruoVerde inherits Monstruo (image="monstruo_verde.png") {}
+
 
 class MonstruoAmarillo inherits Monstruo (image="YellowSquid.png") {
     override method move() {

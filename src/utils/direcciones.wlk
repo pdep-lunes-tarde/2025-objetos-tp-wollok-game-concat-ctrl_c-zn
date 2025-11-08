@@ -6,24 +6,32 @@ object izquierda{
     method siguientePosicion(posicion){
         return posicion.left(1)
     }
+
+    method doblar() = arriba
 }
 
 object derecha{
     method siguientePosicion(posicion){
         return posicion.right(1)
     }
+
+    method doblar() = abajo 
 }
 
 object arriba{
     method siguientePosicion(posicion){
         return posicion.up(1)
     }
+
+    method doblar() = derecha 
 }
 
 object abajo{
     method siguientePosicion(posicion){
         return posicion.down(1)
     }
+
+    method doblar() = izquierda
 }
 object sinDireccion {
     method siguientePosicion(posicion) {
