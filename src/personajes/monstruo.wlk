@@ -24,7 +24,7 @@ class Monstruo {
     method move() {
         const nuevaPosicion = direccion.siguientePosicion(posicion)
         
-        if (badIceCream.dentroDeLosLimites(nuevaPosicion) && !badIceCream.hayHielo(nuevaPosicion)) {
+        if (badIceCream.mePuedoMover(nuevaPosicion)) {
             // Si no esta en el limite y no hay hielo, avanzar
             posicion = nuevaPosicion
         }

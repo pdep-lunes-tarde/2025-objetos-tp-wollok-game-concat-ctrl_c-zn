@@ -9,8 +9,6 @@ import niveles.nivel_1.*
 import niveles.nivel_2.*
 import niveles.nivel_3.*
 
-//pool de objetos?
-
 object badIceCream {
     var frutas = []
     var hielos = []
@@ -92,6 +90,11 @@ object badIceCream {
         return nuevaPosicion.x() >= 0 && nuevaPosicion.x() < self.ancho() - 1 &&
            nuevaPosicion.y() >= 0 && nuevaPosicion.y() < self.alto() - 1
     }
+    
+    method mePuedoMover(posicionNueva) = self.dentroDeLosLimites(posicionNueva) && !self.hayHielo(posicionNueva)
+
+    method puedoRoperHieloEn(posicionNueva) = self.dentroDeLosLimites(posicionNueva) && self.hayHielo(posicionNueva)
+
     
     method aniadirHielo(hielo) {
         hielos.add(hielo)

@@ -42,7 +42,7 @@ class Helado {
         direccion = nuevaDireccion
         const nuevaPosicion = nuevaDireccion.siguientePosicion(posicion)
         if(!self.perdio()){
-            if (badIceCream.dentroDeLosLimites(nuevaPosicion) && !badIceCream.hayHielo(nuevaPosicion)) {
+            if (badIceCream.mePuedoMover(nuevaPosicion)) {
                 posicion = self.posicionCorregida(nuevaPosicion)
                 self.direccion(nuevaDireccion)
                 self.cambiarImagenPorDireccion(nuevaDireccion)
@@ -66,10 +66,10 @@ class Helado {
 
         if (!self.perdio() && badIceCream.dentroDeLosLimites(siguientePosicion)) {            
             if (!badIceCream.hayHielo(siguientePosicion)) {
-                hielo.crearHielosDesde(siguientePosicion, direccion)
+                self.crearHielosDesde(siguientePosicion)
             } 
             else {
-                hielo.romperFilaDesde(siguientePosicion, direccion)
+                self.romperFilaDesde(siguientePosicion)
             }
         }
     }
@@ -83,7 +83,27 @@ class Helado {
       }
     }
 
-    
+    method crearHielosDesde(posicionHielo) {
+        if (badIceCream.mePuedoMover(posicionHielo)) {
+            const nuevoHielo = new Hielo()
+            nuevoHielo.position(posicionHielo)
+
+            game.addVisual(nuevoHielo)
+            badIceCream.aniadirHielo(nuevoHielo)
+
+            self.crearHielosDesde(direccion.siguientePosicion(posicionHielo))
+        }
+    }
+
+    method romperFilaDesde(posicionHielo) {
+        if (badIceCream.puedoRoperHieloEn(posicionHielo)) {
+            const hielo = badIceCream.obtenerHielo(posicionHielo)
+            game.removeVisual(hielo)
+            badIceCream.eliminarHielo(hielo)
+
+            self.romperFilaDesde(direccion.siguientePosicion(posicionHielo))
+        }
+    }
 }
 
 object vainilla inherits Helado{
